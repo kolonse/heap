@@ -15,17 +15,8 @@ function Heap(opt){
     this.cmp = opt.cmp || (function(a,b){ return a - b;});
     this.arr = opt.arr || [] ;
     this.heap = [] ;
-
-    if(this.arr.length <= this.size){
-        this.initHeap();
-        this.createHeap();
-    }else{
-        var tmp = this.arr ;
-        this.arr = [] ;
-        for(var i = 0;i < tmp.length;i ++){
-            this.push(tmp[i],true);
-        }
-    }
+    this.initHeap();
+    this.createHeap();
 }
 
 Heap.prototype = {
@@ -49,6 +40,7 @@ Heap.prototype = {
                 this.adjustHeap(0) ;
             }
         }else{
+            // 将元素插入队尾  然后进行自下而上调整
             this.arr.push(e);
             this.heap.push(this.arr.length - 1);
 //            this.adjustHeapUp(this.heap.length - 1);
